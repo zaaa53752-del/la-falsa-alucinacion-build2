@@ -1,0 +1,59 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+group = 'com.falsaalucinacion'
+version = '1.0.0'
+base { archivesName = 'la_falsa_alucinacion' }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: '1.20.1'
+    copyIdeResources = true
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'info'
+            mods { falsaalucinacion { source sourceSets.main } }
+        }
+        client { property 'forge.enabledGameTestNamespaces', 'falsaalucinacion' }
+        server { property 'forge.enabledGameTestNamespaces', 'falsaalucinacion'; args '--nogui' }
+    }
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.20.1-47.4.16'
+}
+
+processResources {
+    var replaceProperties = [minecraft_version: '1.20.1', forge_version: '47.4.16', mod_id: 'falsaalucinacion', mod_name: 'La Falsa Alucinación', mod_version: project.version]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) { expand replaceProperties }
+}
+
+jar {
+    manifest {
+        attributes([
+                'Specification-Title': 'falsaalucinacion',
+                'Specification-Vendor': 'FalsaAlucinacion',
+                'Specification-Version': '1',
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'FalsaAlucinacion'
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications { mavenJava(MavenPublication) { artifact jar } }
+    repositories { maven { url = layout.projectDirectory.dir('mcmodsrepo') } }
+}

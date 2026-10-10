@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="falsaalucinacion"
+version="${mod_version}"
+displayName="La Falsa Alucinación"
+authors="Proyecto La Falsa Alucinación"
+description='''Terror psicológico: una realidad paralela aparece a partir del quinto día. El mod usa efectos visuales, criaturas animadas y pistas ambientales; no envía mensajes al chat.'''
+
+[[dependencies.falsaalucinacion]]
+modId="forge"
+mandatory=true
+versionRange="[47.2.0,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.falsaalucinacion]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"

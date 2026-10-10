@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {"item": "falsaalucinacion:gema_libertad"},
+    {"item": "minecraft:stick"},
+    {"item": "minecraft:cobweb"}
+  ],
+  "result": {"item": "falsaalucinacion:pico_glitch", "count": 1}
+}
